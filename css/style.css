@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-html{
+html {
   font-size: 16px;
 }
 body {
@@ -66,7 +66,6 @@ body {
   max-width: 575px;
   width: 100%;
   line-height: 1.875rem;
-  font-weight: ;
 }
 
 .hero-img {
@@ -229,14 +228,18 @@ hr {
   letter-spacing: 0.02rem;
 }
 
-
 /* media querry */
-
 
 /* media 991px lg */
 @media screen and (max-width: 991px) {
   html {
     font-size: 15px;
+  }
+  .hero-para {
+    margin: 0 auto;
+  }
+  .banner {
+    height: 50vh;
   }
 }
 
@@ -245,9 +248,9 @@ hr {
   html {
     font-size: 14px;
   }
-  .banner {
-    height: 70dvh;
-  }
+  /* .banner {
+    height: 70vh;
+  } */
 }
 /* media 575px sm */
 @media screen and (max-width: 575px) {
@@ -260,5 +263,4 @@ hr {
   html {
     font-size: 13px;
   }
-  
 }
