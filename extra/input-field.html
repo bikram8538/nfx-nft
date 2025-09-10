@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .input-group {
+  display: flex;
+  width: 100%;
+  max-width: 300px; /* Adjust as needed */
+  background-color: #333; /* Dark background to match the image */
+  border-radius: 5px;
+  overflow: hidden; /* Ensures the button stays within the input */
+}
+
+.form-control {
+  flex: 1;
+  border: none;
+  background-color: #666; /* Gray background for input */
+  color: white;
+  padding: 10px;
+  font-size: 14px;
+  outline: none; /* Remove default outline */
+}
+
+.send-btn {
+  background: linear-gradient(to right, #8A2BE2, #FF1493); /* Purple to pink gradient */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.send-btn:hover {
+  opacity: 0.9; /* Slight dim on hover */
+}
+
+p {
+  color: white;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+    </style>
+</head>
+<body>
+    <div class="input-group">
+  <input type="email" class="form-control" placeholder="Your Email" aria-label="Your Email">
+  <button type="button" class="btn send-btn">SEND</button>
+</div>
+<p>Get the latest NEXA Updates</p>
+</body>
+</html>

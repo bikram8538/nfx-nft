@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NEXA NFT Wireframe</title>
+<style>
+  /* Reset and base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0a0a0a;
+    color: #ddd;
+    line-height: 1.5;
+  }
+  a, button {
+    cursor: pointer;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  /* Container */
+  .container {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+  }
+  /* Header */
+  header {
+    background-color: #0a0a0a;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #222;
+  }
+  .logo {
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: #b529d8;
+    letter-spacing: 0.1em;
+    user-select: none;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  nav a {
+    color: #bbb;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  nav a:hover {
+    background-color: #b529d8;
+    color: #111;
+  }
+  .search-box {
+    position: relative;
+  }
+  .search-box input {
+    background: #181818;
+    border: 1px solid #444;
+    border-radius: 20px;
+    padding: 6px 30px 6px 12px;
+    color: #eee;
+    font-size: 0.9rem;
+    width: 160px;
+    transition: width 0.3s ease;
+  }
+  .search-box input::placeholder {
+    color: #555;
+  }
+  .search-box:focus-within input {
+    width: 220px;
+    border-color: #b529d8;
+  }
+  .search-box svg {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    fill: #777;
+  }
+  .header-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  .btn-primary {
+    background-color: #d628c7;
+    border: none;
+    color: #111;
+    font-weight: 700;
+    padding: 7px 18px;
+    border-radius: 20px;
+    user-select: none;
+    transition: background-color 0.3s;
+  }
+  .btn-primary:hover {
+    background-color: #9f1e8a;
+    color: #eee;
+  }
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid #d628c7;
+    color: #d628c7;
+    padding: 7px 18px;
+    border-radius: 20px;
+    font-weight: 600;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .btn-outline:hover {
+    background-color: #d628c7;
+    color: #111;
+  }
+  /* Hero Section */
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    margin: 32px 0 60px;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .hero-text {
+    flex: 1 1 350px;
+    color: #eee;
+  }
+  .hero-text h1 {
+    font-size: 2.75rem;
+    line-height: 1.1;
+    font-weight: 900;
+    margin-bottom: 14px;
+  }
+  .hero-text p {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 24px;
+    max-width: 340px;
+  }
+  .hero-text .btn-wrap {
+    display: flex;
+    gap: 14px;
+  }
+  .hero-images {
+    flex: 1 1 480px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2, 140px);
+    gap: 12px;
+  }
+  .hero-images > div {
+    background-color: #222;
+    border-radius: 16px;
+  }
+  .hero-images > div.large {
+    grid-row: 1 / span 2;
+  }
+  /* Placeholder rectangles for images */
+  .img-placeholder {
+    background: #3a3a3a;
+    border-radius: 14px;
+  }
+  /* Section titles with spacing */
+  section {
+    margin-bottom: 50px;
+  }
+  section h2 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    user-select: none;
+  }
+  /* Basic horizontal card slider container */
+  .slider {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #b529d8 transparent;
+  }
+  .slider::-webkit-scrollbar {
+    height: 8px;
+  }
+  .slider::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .slider::-webkit-scrollbar-thumb {
+    background-color: #b529d8;
+    border-radius: 20px;
+  }
+  /* Card style for artworks and NFTs */
+  .card {
+    min-width: 150px;
+    background-color: #222;
+    border-radius: 15px;
+    overflow: hidden;
+    flex-shrink: 0;
+    user-select: none;
+  }
+  .card .img-area {
+    height: 180px;
+    background-color: #444;
+  }
+  .card .card-info {
+    padding: 12px 10px 14px;
+    color: #ccc;
+    font-size: 0.85rem;
+  }
+  /* Live Auction card with distinct bottom area */
+  .live-auction .card-info {
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .price {
+    color: #7aea70;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .btn-small {
+    background-color: #b529d8;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #111;
+    user-select: none;
+  }
+  .btn-small:hover {
+    background-color: #851a94;
+  }
+  /* Top Collection Table */
+  .top-collection table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .top-collection th, .top-collection td {
+    text-align: left;
+    padding: 10px 10px;
+    user-select: none;
+  }
+  .top-collection th {
+    border-bottom: 2px solid #555;
+    color: #bbb;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .top-collection tr:nth-child(even) {
+    background-color: #151515;
+  }
+  .top-collection .collection-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .top-collection .collection-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #444;
+  }
+  .top-collection .eth-value {
+    font-weight: 700;
+  }
+  .top-collection .eth-up {
+    color: #7aea70;
+  }
+  .top-collection .eth-down {
+    color: #eb5757;
+  }
+  /* Discover NFT & Popular categories grid layout */
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    gap: 16px;
+  }
+  /* Category card with label below image */
+  .category-card {
+    background-color: #222;
+    border-radius: 16px;
+    text-align: center;
+    padding-bottom: 12px;
+    user-select: none;
+  }
+  .category-card .img-area {
+    height: 140px;
+    background-color: #444;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+  .category-card span {
+    display: block;
+    margin-top: 8px;
+    font-weight: 600;
+    color: #ccc;
+  }
+  /* Create & Sell NFTs section */
+  .create-sell {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    justify-content: center;
+  }
+  .create-sell .box {
+    background-color: #222;
+    flex: 1 1 220px;
+    border-radius: 16px;
+    padding: 24px 18px 18px;
+    color: #bbb;
+    text-align: center;
+    user-select: none;
+    min-width: 220px;
+  }
+  .create-sell .box .icon {
+    width: 64px;
+    height: 64px;
+    background-color: #444;
+    border-radius: 14px;
+    margin: 0 auto 14px;
+  }
+  .create-sell .box h3 {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #eee;
+    margin-bottom: 12px;
+  }
+  /* Latest Articles cards */
+  .articles {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .articles .article-card {
+    background-color: #222;
+    border-radius: 16px;
+    flex: 0 0 280px;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .articles .article-card .img-area {
+    height: 160px;
+    background-color: #444;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+  .articles .article-content {
+    padding: 16px 16px 18px;
+    color: #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    flex-grow: 1;
+  }
+  .articles .article-content h4 {
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+    color: #eee;
+  }
+  .articles .article-content p {
+    font-size: 0.85rem;
+    color: #aaa;
+    flex-grow: 1;
+    margin-bottom: 12px;
+  }
+  .articles .article-content a {
+    align-self: flex-start;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #d628c7;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .articles .article-content a:hover {
+    border-color: #d628c7;
+  }
+  /* Footer */
+  footer {
+    background-color: #0a0a0a;
+    border-top: 1px solid #222;
+    padding: 35px 20px 25px;
+    color: #666;
+    font-size: 0.85rem;
+    user-select: none;
+  }
+  footer .footer-top {
+    max-width: 1150px;
+    margin: 0 auto 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  footer .footer-column {
+    min-width: 160px;
+    flex: 1 1 180px;
+  }
+  footer .footer-column h5 {
+    color: #bbb;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  footer .footer-column ul {
+    list-style: none;
+  }
+  footer .footer-column ul li {
+    margin-bottom: 9px;
+  }
+  footer .footer-column ul li a {
+    color: #666;
+    text-decoration: none;
+  }
+  footer .footer-column ul li a:hover {
+    color: #d628c7;
+  }
+  footer .footer-subscribe {
+    max-width: 280px;
+  }
+  footer .subscribe-input {
+    display: flex;
+  }
+  footer .subscribe-input input[type="email"] {
+    flex-grow: 1;
+    border-radius: 20px 0 0 20px;
+    border: 1px solid #444;
+    padding: 7px 14px;
+    background-color: #151515;
+    font-size: 0.9rem;
+    color: #eee;
+    outline: none;
+  }
+  footer .subscribe-input input[type="email"]::placeholder {
+    color: #777;
+  }
+  footer .subscribe-input button {
+    border-radius: 0 20px 20px 0;
+    border: none;
+    background-color: #b529d8;
+    color: #111;
+    padding: 7px 16px;
+    font-weight: 700;
+  }
+  footer .subscribe-input button:hover {
+    background-color: #931aad;
+  }
+  footer .footer-bottom {
+    max-width: 1150px;
+    margin: 0 auto;
+    text-align: center;
+    color: #444;
+    font-size: 0.75rem;
+    user-select: none;
+  }
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      gap: 28px;
+    }
+    .hero-images {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, 140px);
+    }
+  }
+  @media (max-width: 480px) {
+    nav {
+      gap: 12px;
+      width: 100%;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    .header-buttons {
+      justify-content: center;
+      width: 100%;
+      margin-top: 8px;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo" aria-label="NEXA NFT Logo">NEXA NFT</div>
+  <nav aria-label="Primary navigation">
+    <div class="search-box" role="search">
+      <input type="search" placeholder="Search anything" aria-label="Search for NFTs or artists" />
+      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+        <path d="M21.53 20.47l-5.796-5.796A7.879 7.879 0 0 0 17 9a8 8 0 1 0-8 8 7.879 7.879 0 0 0 5.674-2.266l5.796 5.796a.75.75 0 0 0 1.06-1.06zM4.5 9a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0z"/>
+      </svg>
+    </div>
+    <a href="#">Home</a>
+    <a href="#">Pages</a>
+    <a href="#">Projects</a>
+    <a href="#">NFT Collections</a>
+    <a href="#">Products</a>
+  </nav>
+  <div class="header-buttons">
+    <button class="btn-primary" type="button">Log In</button>
+    <button class="btn-outline" type="button">Create NFT</button>
+  </div>
+</header>
+
+<main class="container" role="main" aria-label="NEXA NFT Main Content">
+  <!-- Hero Section -->
+  <section class="hero" aria-label="Discover rare artworks by world class artists hero banner">
+    <div class="hero-text">
+      <h1>Discover rare artworks by world class artists</h1>
+      <p>Ethics & Global NFT Scouts empower you to launch your own website based NFT store or NFT Marketplace using the newest technologies.</p>
+      <div class="btn-wrap">
+        <button class="btn-primary" type="button" aria-label="Place a Bid on featured artwork">Place a Bid</button>
+        <button class="btn-outline" type="button" aria-label="View Artworks">View Artwork</button>
+      </div>
+    </div>
+    <div class="hero-images" aria-hidden="true">
+      <div class="img-placeholder" title="Abstract colorful art with face design large rectangle"></div>
+      <div class="img-placeholder" title="Anime style digital artwork character in pink colors"></div>
+      <div class="img-placeholder" title="Colorful pop-art style comic illustrative faces"></div>
+    </div>
+  </section>
+
+  <!-- Latest Artwork -->
+  <section aria-label="Latest Artwork">
+    <h2>Latest Artwork</h2>
+    <div class="slider" tabindex="0" aria-roledescription="carousel" aria-label="Latest Artwork carousel">
+      <div class="card" role="group" aria-label="Artwork 1 of 4">
+        <div class="img-area img-placeholder" title="Latest artwork 1"></div>
+      </div>
+      <div class="card" role="group" aria-label="Artwork 2 of 4">
+        <div class="img-area img-placeholder" title="Latest artwork 2"></div>
+      </div>
+      <div class="card" role="group" aria-label="Artwork 3 of 4">
+        <div class="img-area img-placeholder" title="Latest artwork 3"></div>
+      </div>
+      <div class="card" role="group" aria-label="Artwork 4 of 4">
+        <div class="img-area img-placeholder" title="Latest artwork 4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Auction -->
+  <section aria-label="Live Auction NFTs">
+    <h2>Live Auction</h2>
+    <div class="slider live-auction" tabindex="0" aria-roledescription="carousel" aria-label="Live Auction carousel">
+      <div class="card" role="group" aria-label="Live auction item Avril15.eth with 4.4 ETH current bid">
+        <div class="img-area img-placeholder" title="Live auction NFT 1"></div>
+        <div class="card-info">
+          <span>Avril15.eth</span>
+          <span class="price">4.4 ETH</span>
+          <button class="btn-small" type="button" aria-label="Place a bid on Avril15.eth">Place a Bid</button>
+        </div>
+      </div>
+      <div class="card" role="group" aria-label="Live auction item Plurr#3518 with 0.1 ETH current bid">
+        <div class="img-area img-placeholder" title="Live auction NFT 2"></div>
+        <div class="card-info">
+          <span>Plurr#3518</span>
+          <span class="price">0.1 ETH</span>
+          <button class="btn-small" type="button" aria-label="Place a bid on Plurr#3518">Place a Bid</button>
+        </div>
+      </div>
+      <div class="card" role="group" aria-label="Live auction item BirdX#2378 with 0.4 ETH current bid">
+        <div class="img-area img-placeholder" title="Live auction NFT 3"></div>
+        <div class="card-info">
+          <span>BirdX#2378</span>
+          <span class="price">0.4 ETH</span>
+          <button class="btn-small" type="button" aria-label="Place a bid on BirdX#2378">Place a Bid</button>
+        </div>
+      </div>
+      <div class="card" role="group" aria-label="Live auction item ClonX#8970 with 0.2 ETH current bid">
+        <div class="img-area img-placeholder" title="Live auction NFT 4"></div>
+        <div class="card-info">
+          <span>ClonX#8970</span>
+          <span class="price">0.2 ETH</span>
+          <button class="btn-small" type="button" aria-label="Place a bid on ClonX#8970">Place a Bid</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Collection -->
+  <section class="top-collection" aria-label="Top Collection NFT statistics and rankings">
+    <h2>Top Collection</h2>
+    <table role="table" aria-label="Top collection table">
+      <thead>
+        <tr>
+          <th scope="col">Collection</th>
+          <th scope="col">Volume</th>
+          <th scope="col">Change</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="collection-name"><div class="collection-avatar" title="Bored Ape Yacht Club logo"></div>Bored Ape Yacht Club</div></td>
+          <td><span class="eth-value">3.6K ETH</span></td>
+          <td><span class="eth-up">+7.85%</span></td>
+        </tr>
+        <tr>
+          <td><div class="collection-name"><div class="collection-avatar" title="Goblintown.wtf logo"></div>Goblintown.wtf</div></td>
+          <td><span class="eth-value">2.1K ETH</span></td>
+          <td><span class="eth-up">+12.5%</span></td>
+        </tr>
+        <tr>
+          <td><div class="collection-name"><div class="collection-avatar" title="PROOF Collective logo"></div>PROOF Collective</div></td>
+          <td><span class="eth-value">7.3K ETH</span></td>
+          <td><span class="eth-up">+10.4%</span></td>
+        </tr>
+        <tr>
+          <td><div class="collection-name"><div class="collection-avatar" title="Bored Ape Yacht Club logo"></div>Bored Ape Yacht Club</div></td>
+          <td><span class="eth-value">3.6K ETH</span></td>
+          <td><span class="eth-down">-3.49%</span></td>
+        </tr>
+        <tr>
+          <td><div class="collection-name"><div class="collection-avatar" title="Anuki NFT logo"></div>Anuki</div></td>
+          <td><span class="eth-value">4.1K ETH</span></td>
+          <td><span class="eth-down">-2.07%</span></td>
+        </tr>
+        <tr>
+          <td><div class="collection-name"><div class="collection-avatar" title="Decedes logo"></div>Decedes</div></td>
+          <td><span class="eth-value">3.1K ETH</span></td>
+          <td><span class="eth-up">+3.39%</span></td>
+        </tr>
+        <tr>
+          <td><div class="collection-name"><div class="collection-avatar" title="CryptoPunks logo"></div>CryptoPunks</div></td>
+          <td><span class="eth-value">1.1K ETH</span></td>
+          <td><span class="eth-up">+22.43%</span></td>
+        </tr>
+        <tr>
+          <td><div class="collection-name"><div class="collection-avatar" title="Shitbeast logo"></div>Shitbeast</div></td>
+          <td><span class="eth-value">1.05K ETH</span></td>
+          <td><span class="eth-up">+18.93%</span></td>
+        </tr>
+        <tr>
+          <td><div class="collection-name"><div class="collection-avatar" title="Shitbeast logo"></div>Shitbeast</div></td>
+          <td><span class="eth-value">1.98 ETH</span></td>
+          <td><span class="eth-down">-6.07%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Discover NFT -->
+  <section aria-label="Discover NFT collection">
+    <h2>Discover NFT</h2>
+    <div class="grid-4">
+      <div class="card" role="group" aria-label="NFT item Avril15.eth with 4.4 ETH current bid">
+        <div class="img-area img-placeholder" title="NFT Avril15.eth"></div>
+        <div class="card-info">
+          <span>Avril15.eth - 4.4 ETH</span><br/>
+          <button class="btn-small" type="button" aria-label="Place a bid on Avril15.eth">Place a Bid</button>
+        </div>
+      </div>
+      <div class="card" role="group" aria-label="NFT item Plurr#3518 with 0.1 ETH current bid">
+        <div class="img-area img-placeholder" title="NFT Plurr#3518"></div>
+        <div class="card-info">
+          <span>Plurr#3518 - 0.1 ETH</span><br/>
+          <button class="btn-small" type="button" aria-label="Place a bid on Plurr#3518">Place a Bid</button>
+        </div>
+      </div>
+      <div class="card" role="group" aria-label="NFT item BirdX#2378 with 0.4 ETH current bid">
+        <div class="img-area img-placeholder" title="NFT BirdX#2378"></div>
+        <div class="card-info">
+          <span>BirdX#2378 - 0.4 ETH</span><br/>
+          <button class="btn-small" type="button" aria-label="Place a bid on BirdX#2378">Place a Bid</button>
+        </div>
+      </div>
+      <div class="card" role="group" aria-label="NFT item ClonX#8970 with 0.2 ETH current bid">
+        <div class="img-area img-placeholder" title="NFT ClonX#8970"></div>
+        <div class="card-info">
+          <span>ClonX#8970 - 0.2 ETH</span><br/>
+          <button class="btn-small" type="button" aria-label="Place a bid on ClonX#8970">Place a Bid</button>
+        </div>
+      </div>
+      <div class="card" role="group" aria-label="NFT item Ape15.eth with 4.4 ETH current bid">
+        <div class="img-area img-placeholder" title="NFT Ape15.eth"></div>
+        <div class="card-info">
+          <span>Ape15.eth - 4.4 ETH</span><br/>
+          <button class="btn-small" type="button" aria-label="Place a bid on Ape15.eth">Place a Bid</button>
+        </div>
+      </div>
+      <div class="card" role="group" aria-label="NFT item Egoq#3518 with 0.1 ETH current bid">
+        <div class="img-area img-placeholder" title="NFT Egoq#3518"></div>
+        <div class="card-info">
+          <span>Egoq#3518 - 0.1 ETH</span><br/>
+          <button class="btn-small" type="button" aria-label="Place a bid on Egoq#3518">Place a Bid</button>
+        </div>
+      </div>
+      <div class="card" role="group" aria-label="NFT item HopeX#2378 with 0.4 ETH current bid">
+        <div class="img-area img-placeholder" title="NFT HopeX#2378"></div>
+        <div class="card-info">
+          <span>HopeX#2378 - 0.4 ETH</span><br/>
+          <button class="btn-small" type="button" aria-label="Place a bid on HopeX#2378">Place a Bid</button>
+        </div>
+      </div>
+      <div class="card" role="group" aria-label="NFT item ClonX#8970 with 0.2 ETH current bid">
+        <div class="img-area img-placeholder" title="NFT ClonX#8970"></div>
+        <div class="card-info">
+          <span>ClonX#8970 - 0.2 ETH</span><br/>
+          <button class="btn-small" type="button" aria-label="Place a bid on ClonX#8970">Place a Bid</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Categories -->
+  <section aria-label="Popular Categories">
+    <h2>Popular Categories</h2>
+    <div class="grid-4" role="list">
+      <div class="category-card" role="listitem" aria-label="Category Metaverse">
+        <div class="img-area img-placeholder" title="Category Metaverse"></div>
+        <span>Metaverse</span>
+      </div>
+      <div class="category-card" role="listitem" aria-label="Category Photography">
+        <div class="img-area img-placeholder" title="Category Photography"></div>
+        <span>Photography</span>
+      </div>
+      <div class="category-card" role="listitem" aria-label="Category Digital Art">
+        <div class="img-area img-placeholder" title="Category Digital Art"></div>
+        <span>Digital Art</span>
+      </div>
+      <div class="category-card" role="listitem" aria-label="Category Ethereum">
+        <div class="img-area img-placeholder" title="Category Ethereum"></div>
+        <span>Ethereum</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Create and Sell Your NFTs -->
+  <section aria-label="Create and Sell Your NFTs guide">
+    <h2 style="text-align:center;margin-bottom: 24px;">Create and Sell Your NFTs</h2>
+    <div class="create-sell">
+      <div class="box" role="region" aria-label="Step Set Up Your Wallet">
+        <div class="icon"></div>
+        <h3>Set Up Your Wallet</h3>
+        <p>Connect your wallet by clicking the wallet icon in the top right corner. Learn about the wallet we support.</p>
+      </div>
+      <div class="box" role="region" aria-label="Step Create Your Collection">
+        <div class="icon"></div>
+        <h3>Create Your Collection</h3>
+        <p>Customize your collection by clicking the wallet icon in the top right corner. Learn about the wallet we support.</p>
+      </div>
+      <div class="box" role="region" aria-label="Step Add Your NFTs">
+        <div class="icon"></div>
+        <h3>Add Your NFTs</h3>
+        <p>Customize your collection by clicking the wallet icon in the top right corner. Learn about the wallet we support.</p>
+      </div>
+      <div class="box" role="region" aria-label="Step List Them for Sale">
+        <div class="icon"></div>
+        <h3>List Them For Sale</h3>
+        <p>Connect your wallet by clicking the wallet icon in the top right corner. Learn about the wallet we support.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Articles -->
+  <section aria-label="Latest Articles">
+    <h2>Latest Articles</h2>
+    <div class="articles" tabindex="0" aria-roledescription="carousel" aria-label="Latest Articles carousel">
+      <article class="article-card" role="group" aria-label="Article: 8 things You Didn't Know You Could Do NEXA">
+        <div class="img-area img-placeholder" title="Article image 1"></div>
+        <div class="article-content">
+          <h4>8 things You Didn’t Know You Could Do NEXA</h4>
+          <p>If you’re reading this, you’ve probably listed, bought, and sold on NEXA. Creative are starting to gather ...</p>
+          <a href="#" aria-label="Learn more about article 8 things You Didn’t Know You Could Do NEXA">Learn More</a>
+        </div>
+      </article>
+      <article class="article-card" role="group" aria-label="Article: Announcing Our $100m Raise, Led By AlStudio">
+        <div class="img-area img-placeholder" title="Article image 2"></div>
+        <div class="article-content">
+          <h4>Announcing Our $100m Raise, Led By AlStudio</h4>
+          <p>If you’re reading this, you’ve probably listed, bought, and sold on NEXA. Creative are starting to gather ...</p>
+          <a href="#" aria-label="Learn more about article Announcing Our $100m Raise, Led By AlStudio">Learn More</a>
+        </div>
+      </article>
+      <article class="article-card" role="group" aria-label="Article: The Biggest Drop In Time Square Since New Year">
+        <div class="img-area img-placeholder" title="Article image 3"></div>
+        <div class="article-content">
+          <h4>The Biggest Drop In Time Square Since New Year</h4>
+          <p>If you’re reading this, you’ve probably listed, bought, and sold on NEXA. Creative are starting to gather ...</p>
+          <a href="#" aria-label="Learn more about article The Biggest Drop In Time Square Since New Year">Learn More</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer aria-label="Site footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-column">
+        <div class="logo" style="color:#b529d8; font-weight:900; user-select:none;">NEXA NFT</div>
+        <p style="color:#555; margin-top: 12px;">
+          The world’s first and largest digital marketplace for crypto collectibles and non-fungible tokens (NFTs). Buy, sell, and discover exclusive digital items.
+        </p>
+      </div>
+      <div class="footer-column" aria-label="Marketplaces links">
+        <h5>Marketplaces</h5>
+        <ul>
+          <li><a href="#">Explore</a></li>
+          <li><a href="#">Curated</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">How it works</a></li>
+          <li><a href="#">Help center</a></li>
+        </ul>
+      </div>
+      <div class="footer-column" aria-label="Useful links">
+        <h5>Useful Links</h5>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">All NFTs</a></li>
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Articles</a></li>
+        </ul>
+      </div>
+      <div class="footer-column footer-subscribe" aria-label="Newsletter subscription form">
+        <h5>Get the latest NEXA Updates</h5>
+        <form>
+          <div class="subscribe-input">
+            <input type="email" aria-label="Your email address" placeholder="Your email" required/>
+            <button type="submit" aria-label="Send subscription request">SEND</button>
+          </div>
+        </form>
+        <div style="margin-top:20px;font-size:0.95rem; color:#bbb;">
+          Join NEXA Community
+        </div>
+        <div style="margin-top:10px; display: flex; gap: 14px; font-size: 22px; color: #777;" aria-label="Social media links">
+          <a href="#" aria-label="Twitter" style="color:#777; text-decoration:none;">T</a>
+          <a href="#" aria-label="YouTube" style="color:#777; text-decoration:none;">Y</a>
+          <a href="#" aria-label="Instagram" style="color:#777; text-decoration:none;">I</a>
+          <a href="#" aria-label="Discord" style="color:#777; text-decoration:none;">D</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; Copyright NEXA 2023 All Right Reserved
+    </div>
+  </div>
+</footer>
+</body>
+</html>
+
+``` ⬤
